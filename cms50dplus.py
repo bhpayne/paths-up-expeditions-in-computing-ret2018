@@ -79,6 +79,7 @@ def get_cms_data(init):
     for entry in data:
         values = entry.values()
 
+        print('values=',values)
         # The pulse rate is stored in the 2nd element of the dictionary object as an int.
         single_record['pulseRate'] = values[0]
 
