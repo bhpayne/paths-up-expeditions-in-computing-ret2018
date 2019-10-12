@@ -37,6 +37,7 @@ def get_buffer(port,data):
     buf.fromstring(port.read(128))
     temp = buf.tolist()
 
+    print('temp=',temp)
     if len(temp) % numSymbols != 0:
         print('error in data')
 
@@ -48,6 +49,7 @@ def get_buffer(port,data):
     # Bytes 0 and 1 are a header equal to 0x01, 0xe0.
     # Bytes 7 and 8 are a footer equal to 0xff, 0xff.
     for data in parsedData:
+        print('data=',data)
         pulseWaveform = data[3]
 
         pulseRate = (data[4] & 0x40) << 1
