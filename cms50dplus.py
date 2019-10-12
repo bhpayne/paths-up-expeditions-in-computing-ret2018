@@ -79,7 +79,7 @@ def get_cms_data(init):
     for entry in data:
         values = list(entry.values())
 
-        #print('values=',values)
+        print('values=',values)
         # The pulse rate is stored in the 2nd element of the dictionary object as an int.
         single_record['pulseRate'] = values[0]
 
@@ -89,7 +89,7 @@ def get_cms_data(init):
         # The time is stored in the 5th element of the dictionary object as a
         # datetime object.
         # The time as a string is converted into a datetime object
-        read_time = datetime.strptime(values[1], '%Y-%m-%d %H:%M:%S.%f')
+        read_time = datetime.strptime(values[3], '%Y-%m-%d %H:%M:%S.%f')
 
         # The elapsed time since we started reading data and this reading.
         # The total_seconds method returned
