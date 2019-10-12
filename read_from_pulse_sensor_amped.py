@@ -19,7 +19,7 @@ def print_serial_ports():
     import serial.tools.list_ports
     ports = [comport.device for comport in serial.tools.list_ports.comports()]
     for port in ports:
-        print port
+        print(port)
 
 # Setup the file: note start time, open file, create filename, return the filename
 def setup_csv(csvStr=None):
@@ -40,7 +40,7 @@ def save_to_csv(csvFileName, allData):
     with io.open(csvFileName + '.csv', 'a', newline='') as f:
         row = unicode(unicode(ampedData['pulseWaveform'])+','+unicode(ampedData['pulseRate'])+','+unicode(ampedData['time'])+','+unicode(cmsData['pulseWaveform'])+','+unicode(cmsData['pulseRate'])+','+unicode(cmsData['time']))
         f.write(row)
-        f.write(u'\n')  
+        f.write(u'\n')
 
 ser = serial.Serial(amped_comport, amped_baudrate, timeout=amped_serial_timeout)    # open serial port
 
@@ -50,7 +50,7 @@ def get_data_amped():
     signal = -1
     serialRead = ser.readline()
     single_record = {}
-    read_time = datetime.now()    
+    read_time = datetime.now()
     arduino_input = serialRead.strip()
 
     if arduino_input.count(",") == 2:

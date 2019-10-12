@@ -1,5 +1,5 @@
 # This Python file uses the following encoding: utf-8
-import serial
+import serial # sudo -H pip3 install pyserial
 import time
 import array
 from datetime import datetime

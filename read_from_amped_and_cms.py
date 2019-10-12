@@ -19,7 +19,7 @@ def print_serial_ports():
     import serial.tools.list_ports
     ports = [comport.device for comport in serial.tools.list_ports.comports()]
     for port in ports:
-        print port
+        print(port)
 
 # Setup the file: note start time, open file, create filename, return the filename
 def setup_csv(csvStr=None):
@@ -28,7 +28,7 @@ def setup_csv(csvStr=None):
         csvFileName = now.strftime("%Y-%m-%d_%I_%M_%S")
     else:
         csvFileName = csvStr+'_'+now.strftime("%Y-%m-%d_%I_%M_%S")
-    headers = unicode(u'pulseWaveform1'+','+u'pulseRate1'+','+u'time1'+','+u'pulseWaveform2'+','+u'pulseRate2'+','+u'time2')
+    headers = str(u'pulseWaveform1'+','+u'pulseRate1'+','+u'time1'+','+u'pulseWaveform2'+','+u'pulseRate2'+','+u'time2')
     with io.open(csvFileName + '.csv', 'w', newline='') as f:
         f.write(headers)
         f.write(u'\n')
@@ -38,9 +38,9 @@ def save_to_csv(csvFileName, allData):
     ampedData = allData[0]
     cmsData = allData[1]
     with io.open(csvFileName + '.csv', 'a', newline='') as f:
-        row = unicode(unicode(ampedData['pulseWaveform'])+','+unicode(ampedData['pulseRate'])+','+unicode(ampedData['time'])+','+unicode(cmsData['pulseWaveform'])+','+unicode(cmsData['pulseRate'])+','+unicode(cmsData['time']))
+        row = str(str(ampedData['pulseWaveform'])+','+str(ampedData['pulseRate'])+','+str(ampedData['time'])+','+str(cmsData['pulseWaveform'])+','+str(cmsData['pulseRate'])+','+str(cmsData['time']))
         f.write(row)
-        f.write(u'\n')  
+        f.write(u'\n')
 
 #print('reading from serial port %s...' % amped_comport)
 ser = serial.Serial(amped_comport, amped_baudrate, timeout=amped_serial_timeout)    # open serial port
@@ -53,7 +53,7 @@ def get_data_amped():
     serialRead = ser.readline()
     single_record = {}
     #print(serialRead)
-    read_time = datetime.now()    
+    read_time = datetime.now()
     arduino_input = serialRead.strip()
     #print(arduino_input)
 
@@ -74,7 +74,7 @@ csvFilename = setup_csv('amped_and_cms50dplus')
 port = '/dev/tty.SLAB_USBtoUART'
 cms_init = cms.cms_serial(port,False,csvStr='amped_and_cms_')
 
-#time.sleep(5)    
+#time.sleep(5)
 
 while True:
     cmsData = cms.get_cms_data(cms_init)
