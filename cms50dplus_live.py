@@ -1,7 +1,7 @@
 
-import cmsd50plus as cms
+import cms50dplus as cms
 
-port = '/dev/tty.SLAB_USBtoUART'
+port = '/dev/ttyUSB0'
 cms_init = cms.cms_serial(port, False)
 
 while True:

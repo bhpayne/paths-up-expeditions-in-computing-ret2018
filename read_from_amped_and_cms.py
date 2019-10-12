@@ -8,7 +8,7 @@ import cms50dplus as cms
 import csv
 import io
 
-amped_comport = '/dev/tty.usbmodem1421'
+amped_comport = '/dev/ttyUSB0'
 amped_baudrate = 115200
 amped_serial_timeout = 1
 

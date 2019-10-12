@@ -1,10 +1,10 @@
 ''' Read data from CMS D50+ Pulse Oximeter (firmware ver 4.6)
-Author: J Newland 
+Author: J Newland
         newton@jayfox.net https://github.com/jimmynewland https://jimmynewland.com
 
 Version 1.0.0 2018/06/26
 
-Project: Rice University PATHS-UP/Expeditions in Computing 
+Project: Rice University PATHS-UP/Expeditions in Computing
          Scalable Health Research Experience for Teachers (RET)
 Attribution: Many elements of this code were modified from https://github.com/atbrask/CMS50Dplus
 
@@ -35,11 +35,11 @@ def main():
     # On Mac OS 10.13.5 the port was /dev/tty.SLAB_USBtoUART
     # Alternately, the serial ports can be listed from the OS X command line:
     # ls /dev/tty.*
-    port = '/dev/tty.SLAB_USBtoUART'
-    
+    port = '/dev/ttyUSB0'
+
     print("Press CTRL-C or disconnect the device to terminate data collection.")
-    
-    # Sends the correct serial port as s string and opens the serial connection. 
+
+    # Sends the correct serial port as s string and opens the serial connection.
     # Optionally, the save-to-csv flag can be set to false here.
     # e.g. cms_init = cms.cms_serial(port, False) would initialize the serial connection.
     # but would not save live data to a file.
@@ -48,16 +48,16 @@ def main():
     # This script will read live data until interrupted by CTRL-C or the device is unplugged.
     while True:
         # Take a reading from the CMS D50+. Data is returned as a dictionary object:
-        # { 
-        #   pulseRate (integer 0 - ~220), 
-        #   pulseWaveform (integer 0 - 255 at 255 the light sensor is saturated), 
+        # {
+        #   pulseRate (integer 0 - ~220),
+        #   pulseWaveform (integer 0 - 255 at 255 the light sensor is saturated),
         #   time (seconds since data collection started as a float)
         # }
         cmsData = cms.get_cms_data(cms_init)
         # By default, a call to get_cms_data also save to a CSV file.
         # The filename will be cmsd50_YYYY-MM-DD_HH_MM_SS.csv
         print("Pulse Rate:{}\tSignal:{}\tTime:{}".format(cmsData['pulseRate'],cmsData['pulseWaveform'], cmsData['time']))
-        
+
 # call main
 if __name__ == '__main__':
     main()
